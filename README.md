@@ -6,28 +6,21 @@ run on newer versions of MacOS.
 
 ## Prerequisites
 
-- Install Docker Desktop
 - Have a `~/workspace` directory with your legacy projects
 - Install this repo in that same `~/workspace` directory
+- Install and run Docker Desktop for MacOS
+- Run `docker build -t debian .` for this repo
+- If your legacy project uses MoovJS, make sure you run `npm i` for it before
+  running any of the following instructions
 
 ## Instructions
 
-1. On the command line for this deb-moov repo, run `docker build -t debian .`
-2. Then run `docker compose up -d`
-3. In the Docker Desktop dashboard, click on the `deb-moov-app-1` container
-4. Click on Exec tab
-5. From this container terminal, run `/bin/bash`
-6. Navigate to your workspace project
-7. If it is a MoovJS project, run `npm install`
-8. Run `moov server --verify-ssl-cert=false`
-9. Click on the Files tab
-10. Find the container's `/etc/hosts` file
-11. Update your local (non-docker) machine's `/etc/hosts` to match all the
-    mlocal hostnames from the container's `/etc/hosts` file
-12. Navigate to the mlocal. project in your local (non-docker) machine's
-    browser
-13. Make your development changes on your local (non-docker) machine
-14. Use git on your local (non-docker) machine to push/pull changes to the repo
-15. To run another project afterwards, restart the container (since it does not
-    appear that the container's host file gets reset or is operable after
-    stopping the first moov server)
+1. In this project's compose.yml, update the entrypoint to use the name of the
+   workspace project folder you want to run
+2. Run `docker compose up -d`
+3. Run `docker exec deb-moov-app-1 cat /etc/hosts`
+4. Copy all the moov-generated hostnames to your machine's `/etc/hosts` file
+5. Navigate to the mlocal. project in your browser and proceed with your
+   development workflow on your local machine as normal
+6. Stop the server with `docker stop deb-moov-app-1`
+7. Clear out the moov-generated hostnames from your machine's `/etc/hosts` file
