@@ -6,8 +6,6 @@ run on newer versions of MacOS.
 
 ## Prerequisites
 
-- Have a `~/workspace` directory with your legacy projects
-- Install this repo in that same `~/workspace` directory
 - Install and run Docker Desktop for MacOS
 - Run `docker build -t debian .` for this repo
 - If your legacy project uses MoovJS, make sure you run `npm i` for it before
@@ -15,8 +13,8 @@ run on newer versions of MacOS.
 
 ## Instructions
 
-1. In this project's compose.yml, update the entrypoint to use the name of the
-   workspace project folder you want to run
+1. In this project's compose.yml, update the volume so that the left side of
+   the colon is the path to the project folder that you want to run
 2. Run `docker compose up -d`
 3. Run `docker exec deb-moov-app-1 cat /etc/hosts`
 4. Copy all the moov-generated hostnames to your machine's `/etc/hosts` file

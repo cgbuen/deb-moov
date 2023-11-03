@@ -3,7 +3,7 @@ services:
     image: debian
     build: .
     volumes: 
-      - ~/workspace:/workspace
+      - your-project-path-here:/debproj
     ports:
       - 3003:3003
       - 8004:8004
@@ -12,4 +12,4 @@ services:
       - 443:443
       - 80:80
       - 8082:8082
-    entrypoint: ["/bin/bash", "--login", "-c", "cd workspace/your-legacy-project && moov server --verify-ssl-cert=false"]
+    entrypoint: ["/bin/bash", "--login", "-c", "cd debproj && moov server --verify-ssl-cert=false"]
